@@ -1,4 +1,4 @@
-Проект по автоматизации на python+SeleniumWEB+pyTest+PageObject по курсу "Автоматизация тестирования с помощью Selenium и Python" https://stepik.org/course/575/info
+Тестовое задание:
 
 Краткое описание файлов:
 
@@ -10,7 +10,9 @@ login_page, money_page - тут мы храним методы по конкре
 
 
 Запуск Selenium grid: java -jar selenium-server-4.14.1.jar standalone
+
 Запуск теста: pytest: --alluredir=allure-report
+
 Результатты в allure: allure serve allure-report           
 
 
