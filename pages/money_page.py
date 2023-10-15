@@ -17,7 +17,7 @@ class MoneyPage(BasePage):
 
             case 'deposit':
                 self.browser.find_element(*MoneyPageLocators.DEPOSIT).click()
-                wait.until(lambda x: self.browser.find_element(*MoneyPageLocators.SUBMIT).text == "Deposit" and True)
+                wait.until(lambda x: self.browser.find_element(*MoneyPageLocators.SUBMIT).text == "Deposit")
 
             case 'with':
                 self.browser.find_element(*MoneyPageLocators.WITHDRAWL).click()
