@@ -16,7 +16,7 @@ class LoginPage(BasePage):
         customer.is_displayed()
         bank_manager.is_displayed()
 
-    def select_login_type(self, custom=True):
+    def select_login_type(self, custom: bool = True):
         if custom:
             self.browser.find_element(*LoginPageLocators.CUSTOMER_LOGIN).click()
         else:
@@ -24,4 +24,3 @@ class LoginPage(BasePage):
 
     def login(self):
         self.browser.find_element(*LoginPageLocators.LOGIN).click()
-

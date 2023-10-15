@@ -1,34 +1,37 @@
+from selenium.webdriver.support.wait import WebDriverWait
 from pages.base_page import BasePage
-from pages.locators import  MoneyPageLocators
+from pages.locators import MoneyPageLocators
 from selenium.webdriver.common.by import By
-from function import assert_equal_time
 
 
 class MoneyPage(BasePage):
 
-    def select_operation(self, type_oper='trans'):
+    def select_operation(self, type_oper: str = 'trans'):
+        wait = WebDriverWait(self.browser, timeout=3)
+
         match type_oper:
             case 'trans':
-                self.browser.find_element(*MoneyPageLocators.TRANSACTIONS).click()
-                assert_equal_time(lambda: self.browser.find_element(By.CSS_SELECTOR, ".table").is_displayed(), True, 2)
                 self.browser.refresh()
+                self.browser.find_element(*MoneyPageLocators.TRANSACTIONS).click()
+                wait.until(lambda x: self.browser.find_element(By.CSS_SELECTOR, ".table").is_displayed())
 
             case 'deposit':
                 self.browser.find_element(*MoneyPageLocators.DEPOSIT).click()
-                assert_equal_time(lambda: self.browser.find_element(MoneyPageLocators.SUBMIT).text, "Deposit", 2)
+                wait.until(lambda x: self.browser.find_element(*MoneyPageLocators.SUBMIT).text == "Deposit" and True)
+
             case 'with':
                 self.browser.find_element(*MoneyPageLocators.WITHDRAWL).click()
-                assert_equal_time(lambda: self.browser.find_element(MoneyPageLocators.SUBMIT).text, "Deposit", 2)
+                wait.until(lambda x: self.browser.find_element(*MoneyPageLocators.SUBMIT).text == "Withdraw")
 
-    def input_money_and_submit(self, amount=None):
+    def input_money_and_submit(self, amount: [str, int] = None):
 
         self.browser.find_element(*MoneyPageLocators.AMOUNT_INP).send_keys(amount)
         self.browser.find_element(*MoneyPageLocators.SUBMIT).click()
 
-    def check_balance(self, balance=0):
+    def check_balance(self, balance: int =0):
 
-        assert balance == int(self.browser.find_element(*MoneyPageLocators.INFO_ACCOUNT).text),\
+        assert balance == int(self.browser.find_element(*MoneyPageLocators.INFO_ACCOUNT).text), \
             f"Баланс должен быть {balance}!"
 
-    def get_line_transaction(self, line: str):
+    def get_line_transaction(self, line: str) -> str:
         return self.browser.find_element(By.CSS_SELECTOR, f'[id=anchor{line}').text

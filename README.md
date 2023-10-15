@@ -10,7 +10,7 @@ login_page, money_page - тут мы храним методы по конкре
 
 
 Запуск Selenium grid: java -jar selenium-server-4.14.1.jar standalone
-Запуск теста: pytest: --alluredir=allure-report
+Запуск теста: pytest --alluredir=allure-report
 Результатты в allure: allure serve allure-report           
 
 
