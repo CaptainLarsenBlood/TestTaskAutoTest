@@ -2,6 +2,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pages.base_page import BasePage
 from pages.locators import MoneyPageLocators
 from selenium.webdriver.common.by import By
+import time
 
 
 class MoneyPage(BasePage):
@@ -17,7 +18,7 @@ class MoneyPage(BasePage):
 
             case 'deposit':
                 self.browser.find_element(*MoneyPageLocators.DEPOSIT).click()
-                wait.until(lambda x: self.browser.find_element(*MoneyPageLocators.SUBMIT).text == "Deposit" and True)
+                wait.until(lambda x: self.browser.find_element(*MoneyPageLocators.SUBMIT).text == "Deposit")
 
             case 'with':
                 self.browser.find_element(*MoneyPageLocators.WITHDRAWL).click()
