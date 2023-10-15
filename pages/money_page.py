@@ -28,10 +28,10 @@ class MoneyPage(BasePage):
         self.browser.find_element(*MoneyPageLocators.AMOUNT_INP).send_keys(amount)
         self.browser.find_element(*MoneyPageLocators.SUBMIT).click()
 
-    def check_balance(self, balance: int =0):
+    def check_balance(self, balance: int = 0):
 
         assert balance == int(self.browser.find_element(*MoneyPageLocators.INFO_ACCOUNT).text), \
             f"Баланс должен быть {balance}!"
 
-    def get_line_transaction(self, line: str) -> str:
+    def get_line_transaction(self, line: [str, int]) -> str:
         return self.browser.find_element(By.CSS_SELECTOR, f'[id=anchor{line}').text
